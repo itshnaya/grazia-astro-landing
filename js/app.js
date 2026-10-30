@@ -58,7 +58,23 @@
     $$("[data-open-quiz]").forEach((b) => b.addEventListener("click", () => openFunnel(b.dataset.openQuiz)));
 
     initTabs();
+    initMobileCta();
     window.addEventListener("scroll", () => $("#topbar").classList.toggle("is-scrolled", window.scrollY > 12), { passive: true });
+  }
+
+  /* Barre d'action collante sur mobile : visible quand les boutons du hero et le CTA final sont hors écran */
+  function initMobileCta() {
+    const bar = $("#mobile-cta");
+    if (!("IntersectionObserver" in window)) return;
+    const visible = new Set();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
+      const on = visible.size === 0 && window.scrollY > 200;
+      bar.classList.toggle("is-on", on);
+      bar.setAttribute("aria-hidden", String(!on));
+      $("button", bar).tabIndex = on ? 0 : -1;
+    });
+    [".hero-ctas", ".final", ".footer"].forEach((sel) => io.observe($(sel)));
   }
 
   const TABS = [
@@ -359,6 +375,7 @@
         '<label class="check"><input type="checkbox" name="terms" required><span>J’accepte les <a href="#" data-todo-inline>CGV</a> et la <a href="#" data-todo-inline>politique de confidentialité</a>.</span></label>' +
         '<p class="field-error" data-error></p>' +
         '<button class="btn btn-ink btn-lg btn-block" data-pay>' + (trial ? "Démarrer mon essai gratuit" : "Payer " + A.formatPrice(p.price)) + "</button>" +
+        '<p class="checkout-legal">' + planLegal(state.plan) + "</p>" +
         '<p class="demo-note">Mode démonstration&nbsp;: aucun paiement n’est effectué.</p>' +
         "</form>" +
         '<aside class="summary">' +
