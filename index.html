@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grazia Astrologie — Votre thème astral, version Grazia</title>
+  <meta name="description" content="Horoscope du jour, thème natal complet, tarot et astrologue IA. L’application astrologie de Grazia. Essai gratuit 7 jours.">
+  <meta property="og:title" content="Grazia Astrologie — Votre thème astral, version Grazia">
+  <meta property="og:description" content="Créez votre couverture astrale personnalisée et découvrez votre thème complet.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- TRACKING : pixels Meta / TikTok / Google + bandeau cookies à ajouter ici (voir README) -->
+</head>
+<body>
+
+  <!-- ========== EN-TÊTE ========== -->
+  <header class="topbar" id="topbar">
+    <a class="brand" href="#top" aria-label="Grazia Astrologie — accueil">
+      <img src="assets/grazia-logo-black.svg" alt="Grazia" class="brand-logo">
+      <span class="brand-tag">Astrologie</span>
+    </a>
+    <nav class="topnav" aria-label="Navigation principale">
+      <a href="#sommaire">L’app</a>
+      <a href="#avis">Avis</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button class="btn btn-ink btn-sm" data-open-quiz="header">Ma couverture astrale</button>
+  </header>
+
+  <main id="top">
+
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="kicker"><span class="kicker-dot"></span> <span id="season-label">Saison du Scorpion</span> · Nouvelle app</p>
+        <h1 class="display">L’astrologie,<br><em>version</em> <span class="nowrap">Grazia.</span></h1>
+        <p class="lead">Horoscope du jour, thème natal complet, tarot et astrologue IA&nbsp;— calculés sur votre date, votre heure et votre lieu de naissance. Pour celles qui savent qui elles sont… et veulent en savoir un peu plus.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-ink btn-lg" data-open-quiz="hero">Créer ma couverture astrale <span aria-hidden="true">→</span></button>
+          <a class="btn btn-ghost btn-lg" href="#sommaire">Découvrir l’app</a>
+        </div>
+        <p class="hero-meta"><span class="stars" aria-hidden="true">★★★★★</span> <strong>4,2</strong> sur Google Play · 2 minutes · sans engagement</p>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-phone">
+          <img src="assets/screens/p3.png" alt="">
+        </div>
+        <!-- Couverture d'exemple, remplie par app.js -->
+        <div class="cover cover--hero" id="hero-cover"></div>
+        <span class="sticker">Votre<br>couverture<br><strong>offerte</strong></span>
+      </div>
+    </section>
+
+    <!-- ========== BANDEAU DÉFILANT ========== -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Horoscope du jour</span><i>✦</i><span>Thème natal</span><i>✦</i><span>Tarot</span><i>✦</i><span>Astrologue IA</span><i>✦</i><span>Compatibilité</span><i>✦</i><span>Calendrier lunaire</span><i>✦</i><img src="assets/grazia-logo-white.svg" alt=""><i>✦</i>
+        <span>Horoscope du jour</span><i>✦</i><span>Thème natal</span><i>✦</i><span>Tarot</span><i>✦</i><span>Astrologue IA</span><i>✦</i><span>Compatibilité</span><i>✦</i><span>Calendrier lunaire</span><i>✦</i><img src="assets/grazia-logo-white.svg" alt=""><i>✦</i>
+      </div>
+    </div>
+
+    <!-- ========== SOMMAIRE ========== -->
+    <section class="section sommaire" id="sommaire">
+      <div class="section-head">
+        <p class="kicker">Au sommaire</p>
+        <h2 class="h2">Tout votre ciel,<br><em>dans une seule app.</em></h2>
+      </div>
+      <ol class="toc">
+        <li><span class="toc-num">04</span><div><h3>Horoscope du jour</h3><p>Zones de focus, recommandations, chiffres porte-bonheur, humeur et match amoureux, ajustés à votre Soleil, votre Lune et votre ascendant.</p></div></li>
+        <li><span class="toc-num">12</span><div><h3>Thème natal complet</h3><p>Planètes, maisons, aspects, roue du zodiaque. Touchez chaque élément pour une lecture claire de votre personnalité.</p></div></li>
+        <li><span class="toc-num">18</span><div><h3>Tarot</h3><p>Votre carte du jour ou un tirage «&nbsp;futur proche&nbsp;», avec des lectures guidées et magnifiquement illustrées.</p></div></li>
+        <li><span class="toc-num">24</span><div><h3>Astrologue IA</h3><p>Amour, carrière, relations, timing&nbsp;: posez toutes vos questions, à toute heure, et recevez une réponse sur mesure.</p></div></li>
+        <li><span class="toc-num">30</span><div><h3>Amour &amp; compatibilité</h3><p>Comparez deux signes, découvrez vos meilleurs matchs et qui s’aligne vraiment avec vous.</p></div></li>
+        <li><span class="toc-num">36</span><div><h3>Lune &amp; calendrier cosmique</h3><p>Phases lunaires, signe de la Lune, transits du jour&nbsp;: les meilleurs moments pour agir, aimer, se reposer.</p></div></li>
+        <li><span class="toc-num">42</span><div><h3>Horoscopes du monde</h3><p>Védique, maya, chinois, celte, druidique&nbsp;: plusieurs traditions, une seule app.</p></div></li>
+        <li><span class="toc-num">48</span><div><h3>Astrocartographie</h3><p>Découvrez comment les lieux du monde influencent votre énergie et votre destinée.</p></div></li>
+      </ol>
+    </section>
+
+    <!-- ========== VITRINE (onglets) ========== -->
+    <section class="section showcase">
+      <div class="showcase-inner">
+        <div class="showcase-copy">
+          <p class="kicker kicker--light">À l’intérieur</p>
+          <h2 class="h2 h2--light">Feuilletez <em>l’app.</em></h2>
+          <div class="tabs" role="tablist" aria-label="Fonctionnalités">
+            <button role="tab" aria-selected="true" data-tab="0">Horoscope</button>
+            <button role="tab" aria-selected="false" data-tab="1">Thème natal</button>
+            <button role="tab" aria-selected="false" data-tab="2">Tarot</button>
+            <button role="tab" aria-selected="false" data-tab="3">Astrologue IA</button>
+            <button role="tab" aria-selected="false" data-tab="4">Compatibilité</button>
+          </div>
+          <div class="tab-text" id="tab-text" aria-live="polite"></div>
+          <button class="btn btn-gold" data-open-quiz="showcase">Commencer gratuitement <span aria-hidden="true">→</span></button>
+        </div>
+        <div class="showcase-phone">
+          <img id="tab-img" src="assets/screens/p3.png" alt="Écran Horoscope du jour de l’application">
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ÉDITO ========== -->
+    <section class="section edito">
+      <img src="assets/grazia-logo-black.svg" alt="Grazia" class="edito-logo">
+      <blockquote>
+        «&nbsp;On ne croit pas forcément aux horoscopes. On croit au temps qu’on s’accorde pour se poser les bonnes questions.&nbsp;»
+      </blockquote>
+      <p class="edito-sub">Un rendez-vous quotidien avec vous-même&nbsp;: cinq minutes le matin, un café, et votre ciel du jour.</p>
+    </section>
+
+    <!-- ========== AVIS ========== -->
+    <section class="section avis" id="avis">
+      <div class="section-head section-head--row">
+        <div>
+          <p class="kicker">Elles en parlent</p>
+          <h2 class="h2">Le courrier <em>des lectrices.</em></h2>
+        </div>
+        <div class="rating-badge">
+          <span class="rating-value" id="rating-value">4,2</span>
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span class="rating-src">sur <span id="rating-source">Google Play</span> · <span id="rating-downloads">1 000+</span> téléchargements</span>
+        </div>
+      </div>
+      <div class="reviews" id="reviews"></div>
+    </section>
+
+    <!-- ========== TARIFS ========== -->
+    <section class="section tarifs" id="tarifs">
+      <div class="section-head section-head--center">
+        <p class="kicker">Abonnement</p>
+        <h2 class="h2">Votre ciel, <em>en illimité.</em></h2>
+        <p class="lead lead--center">Toutes les fonctionnalités premium, sur iPhone et Android. Résiliable à tout moment.</p>
+      </div>
+      <div class="plans plans--page" id="plans-page"></div>
+      <ul class="included">
+        <li>Horoscope quotidien personnalisé</li>
+        <li>Thème natal complet &amp; lectures détaillées</li>
+        <li>Astrologue IA illimité</li>
+        <li>Tarot, compatibilité, calendrier lunaire</li>
+        <li>Horoscopes du monde &amp; astrocartographie</li>
+      </ul>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section class="section faq" id="faq">
+      <div class="section-head">
+        <p class="kicker">Questions fréquentes</p>
+        <h2 class="h2">Vous vous <em>demandiez…</em></h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Comment fonctionne l’essai gratuit de 7 jours&nbsp;?</summary>
+          <p>Avec l’abonnement annuel, vous ne payez rien pendant 7 jours. Si vous continuez, 34,99&nbsp;€ sont prélevés à la fin de l’essai pour un an. Vous pouvez annuler avant cette date, sans frais.</p>
+        </details>
+        <details>
+          <summary>Comment accéder à mon compte premium dans l’app&nbsp;?</summary>
+          <p>Après votre inscription, téléchargez l’application sur Google Play ou l’App Store, puis connectez-vous avec l’e-mail et le mot de passe choisis ici. Votre accès premium est immédiatement actif.</p>
+        </details>
+        <details>
+          <summary>Puis-je résilier à tout moment&nbsp;?</summary>
+          <p>Oui. L’abonnement est sans engagement&nbsp;: vous pouvez le résilier en un clic depuis votre espace, et vous gardez l’accès jusqu’à la fin de la période payée.</p>
+        </details>
+        <details>
+          <summary>Pourquoi mon heure et mon lieu de naissance&nbsp;?</summary>
+          <p>Ils permettent de calculer votre ascendant, la position de votre Lune et les maisons de votre thème. Sans eux, l’app se base sur votre signe solaire&nbsp;; vous pourrez les ajouter plus tard.</p>
+        </details>
+        <details>
+          <summary>Sur quels appareils l’app fonctionne-t-elle&nbsp;?</summary>
+          <p>Sur iPhone (App Store) et Android (Google Play). Un seul compte, sur tous vos appareils.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ========== CTA FINAL ========== -->
+    <section class="final">
+      <div class="final-copy">
+        <img src="assets/grazia-logo-white.svg" alt="Grazia" class="final-logo">
+        <h2 class="h2 h2--light">Et si c’était <em>vous,</em><br>en couverture&nbsp;?</h2>
+        <p>Répondez à quelques questions et recevez votre couverture astrale personnalisée, avec un premier aperçu de votre thème.</p>
+        <button class="btn btn-gold btn-lg" data-open-quiz="final">Je crée ma couverture <span aria-hidden="true">→</span></button>
+      </div>
+      <div class="cover cover--final" id="final-cover" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <!-- ========== PIED DE PAGE ========== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <img src="assets/grazia-logo-white.svg" alt="Grazia" class="footer-logo">
+      <div class="store-badges" data-store-badges></div>
+    </div>
+    <nav class="footer-links" aria-label="Informations légales">
+      <a href="#" data-todo="mentions">Mentions légales</a>
+      <a href="#" data-todo="cgv">CGV</a>
+      <a href="#" data-todo="confidentialite">Confidentialité</a>
+      <a href="#" data-todo="cookies">Cookies</a>
+      <a href="#" data-todo="contact">Contact</a>
+    </nav>
+    <p class="footer-note">L’application est disponible sous le nom «&nbsp;<span data-store-name>Natal Chart Astrology</span>&nbsp;». Les contenus astrologiques sont proposés à des fins de divertissement et de réflexion personnelle. © <span id="year">2026</span> Grazia.</p>
+  </footer>
+
+  <!-- ========== PARCOURS (overlay plein écran) ========== -->
+  <div class="funnel" id="funnel" role="dialog" aria-modal="true" aria-labelledby="funnel-title" hidden>
+    <div class="funnel-bar">
+      <button class="funnel-back" id="funnel-back" aria-label="Retour">←</button>
+      <img src="assets/grazia-logo-black.svg" alt="Grazia" class="funnel-logo">
+      <button class="funnel-close" id="funnel-close" aria-label="Fermer">✕</button>
+    </div>
+    <div class="funnel-progress" aria-hidden="true"><span id="funnel-progress"></span></div>
+    <div class="funnel-body" id="funnel-body"></div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/astro.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

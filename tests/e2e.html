@@ -1,0 +1,66 @@
+<!doctype html>
+<!-- Test de bout en bout du parcours : lancé par tests/run-e2e.sh (Chrome headless) -->
+<html><body><pre id="out">RUNNING</pre>
+<iframe id="f" src="../index.html" style="width:1200px;height:900px"></iframe>
+<script>
+const log = [];
+const ok = (c, m) => { log.push((c ? "OK   " : "FAIL ") + m); if (!c) failed = true; };
+let failed = false;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+document.getElementById("f").onload = async () => {
+  try {
+    const w = document.getElementById("f").contentWindow, d = w.document, $ = (s) => d.querySelector(s);
+    const set = (el, v) => { el.value = v; el.dispatchEvent(new w.Event("input", { bubbles: true })); el.dispatchEvent(new w.Event("change", { bubbles: true })); };
+    const submit = () => $("#funnel-body form").requestSubmit();
+    ok($("#reviews").children.length === 3, "3 avis affichés");
+    ok($("#plans-page .plan").length !== 0, "offres affichées sur la page");
+    $("[data-open-quiz=hero]").click(); await sleep(100);
+    ok(!$("#funnel").hidden, "parcours ouvert");
+    submit(); await sleep(50);
+    ok($("#funnel").dataset.step === "name", "prénom vide refusé");
+    set($("input[name=name]"), "claire"); submit(); await sleep(100);
+    ok($("#funnel").dataset.step === "birth", "étape date");
+    set($("select[name=day]"), "31"); set($("select[name=month]"), "2"); set($("select[name=year]"), "1980"); submit(); await sleep(50);
+    ok(/existe pas/.test($("[data-error]").textContent), "31 février refusé");
+    set($("select[name=day]"), "14"); set($("select[name=month]"), "11");
+    ok(/Scorpion/.test($("[data-sign-preview]").textContent), "aperçu signe Scorpion");
+    submit(); await sleep(100);
+    ok($("#funnel").dataset.step === "time", "étape heure");
+    $("[data-skip]").click(); await sleep(100);
+    for (const st of ["mood", "priority", "habit"]) {
+      ok($("#funnel").dataset.step === st, "étape " + st);
+      $(".choice").click(); await sleep(400);
+    }
+    ok($("#funnel").dataset.step === "loading", "chargement");
+    await sleep(3200);
+    ok($("#funnel").dataset.step === "result", "résultat");
+    ok(/Claire, vous êtes/.test($("#funnel-title").textContent) && /Scorpion/.test($("#funnel-title").textContent), "titre résultat personnalisé");
+    ok(/Claire/.test($(".cover--result .cover-title").textContent), "couverture au prénom");
+    $("#funnel-back").click(); await sleep(100);
+    ok($("#funnel").dataset.step === "habit", "bouton retour");
+    $(".choice").click(); await sleep(3900);
+    $("[data-next]").click(); await sleep(100);
+    ok($("#funnel").dataset.step === "pricing", "offres");
+    const weekly = $("#funnel-body input[value=weekly]"); weekly.checked = true; weekly.dispatchEvent(new w.Event("change", { bubbles: true }));
+    ok(/6,99/.test($("#funnel-body .plans-legal").textContent), "mentions hebdo");
+    const yearly = $("#funnel-body input[value=yearly]"); yearly.checked = true; yearly.dispatchEvent(new w.Event("change", { bubbles: true }));
+    ok(/7 jours/.test($("#funnel-body .plans-legal").textContent), "mentions essai 7 jours");
+    $("#funnel-body [data-plan-go]").click(); await sleep(100);
+    ok($("#funnel").dataset.step === "checkout", "paiement");
+    ok(/0,00/.test($(".summary-total").textContent), "0 € aujourd'hui (essai)");
+    submit(); await sleep(50);
+    ok($$ = d.querySelectorAll(".field.is-invalid").length >= 5, "champs vides signalés");
+    set($("input[name=email]"), "claire@exemple.fr"); set($("input[name=password]"), "motdepasse1");
+    set($("input[name=card]"), "4242424242424242");
+    ok($("input[name=card]").value === "4242 4242 4242 4242", "formatage carte");
+    set($("input[name=exp]"), "1230"); set($("input[name=cvc]"), "123"); set($("input[name=holder]"), "Claire Test");
+    submit(); await sleep(50);
+    ok(/CGV/.test($("[data-error]").textContent), "CGV obligatoires");
+    $("input[name=terms]").checked = true; submit(); await sleep(1800);
+    ok($("#funnel").dataset.step === "success", "confirmation");
+    ok(/claire@exemple.fr/.test($("#funnel-body").textContent), "e-mail rappelé");
+    ok(w.dataLayer.some((e) => e.event === "purchase" && e.plan === "yearly"), "événement purchase dans dataLayer");
+  } catch (e) { ok(false, "exception : " + e.message); }
+  document.getElementById("out").textContent = (failed ? "E2E FAILED\n" : "E2E PASSED\n") + log.join("\n");
+};
+</script></body></html>
