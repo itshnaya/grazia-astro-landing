@@ -33,4 +33,4 @@ tests/run-e2e.sh                                   # parcours complet dans Chrom
 - **Bandeau cookies + pixels** (Meta, TikTok, Google) : emplacement prévu dans `<head>` ; tous les événements du
   parcours passent déjà par `window.track()` → `dataLayer` (funnel_open, funnel_step, quiz_complete, select_plan, purchase).
 - **Pages légales** : mentions légales, CGV, confidentialité, cookies (liens du pied de page = modèles à rédiger).
-- **Mise en ligne** : sur le site Grazia ou un domaine à fournir.
+- **Mise en ligne** : aperçu sur https://itshnaya.github.io/grazia-astro-landing/ (GitHub Pages, `git push` = mise à jour). Version finale : site Grazia ou domaine à fournir ; retirer alors le `noindex`.
