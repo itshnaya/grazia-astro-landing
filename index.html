@@ -9,7 +9,7 @@
   <title>Grazia Astrologie — Votre thème astral, version Grazia</title>
   <meta name="description" content="Horoscope du jour, thème natal complet, tarot et astrologue IA. L’application astrologie de Grazia. Essai gratuit 7 jours.">
   <meta property="og:title" content="Grazia Astrologie — Votre thème astral, version Grazia">
-  <meta property="og:description" content="Créez votre couverture astrale personnalisée et découvrez votre thème complet.">
+  <meta property="og:description" content="Faites le test gratuit et découvrez votre profil astral, mis en page façon couverture Grazia.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,12 +26,13 @@
       <span class="brand-tag">Astrologie</span>
     </a>
     <nav class="topnav" aria-label="Navigation principale">
+      <a href="#comment">Comment ça marche</a>
       <a href="#sommaire">L’app</a>
       <a href="#avis">Avis</a>
       <a href="#tarifs">Tarifs</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <button class="btn btn-ink btn-sm" data-open-quiz="header"><span class="only-desktop">Ma couverture astrale</span><span class="only-mobile">Commencer</span></button>
+    <button class="btn btn-ink btn-sm" data-open-quiz="header"><span class="only-desktop">Mon profil astral gratuit</span><span class="only-mobile">Faire le test</span></button>
   </header>
 
   <main id="top">
@@ -43,10 +44,10 @@
         <h1 class="display">L’astrologie,<br><em>version</em> <span class="nowrap">Grazia.</span></h1>
         <p class="lead">Horoscope du jour, thème natal complet, tarot et astrologue IA&nbsp;— calculés sur votre date, votre heure et votre lieu de naissance. Pour celles qui savent qui elles sont… et veulent en savoir un peu plus.</p>
         <div class="hero-ctas">
-          <button class="btn btn-ink btn-lg" data-open-quiz="hero">Créer ma couverture astrale <span aria-hidden="true">→</span></button>
+          <button class="btn btn-ink btn-lg" data-open-quiz="hero">Découvrir mon profil astral <span aria-hidden="true">→</span></button>
           <a class="btn btn-ghost btn-lg" href="#sommaire">Découvrir l’app</a>
         </div>
-        <p class="hero-meta"><span class="stars" aria-hidden="true">★★★★★</span> <strong>4,2</strong> sur Google Play · 2 minutes · sans engagement</p>
+        <p class="hero-meta"><span class="stars" aria-hidden="true">★</span> <strong>4,2/5</strong> sur Google Play · Test gratuit · 2 minutes</p>
       </div>
 
       <div class="hero-visual" aria-hidden="true">
@@ -55,7 +56,7 @@
         </div>
         <!-- Couverture d'exemple, remplie par app.js -->
         <div class="cover cover--hero" id="hero-cover"></div>
-        <span class="sticker">Votre<br>couverture<br><strong>offerte</strong></span>
+        <span class="sticker">Votre<br>profil astral<br><strong>offert</strong></span>
       </div>
     </section>
 
@@ -66,6 +67,20 @@
         <span>Horoscope du jour</span><i>✦</i><span>Thème natal</span><i>✦</i><span>Tarot</span><i>✦</i><span>Astrologue IA</span><i>✦</i><span>Compatibilité</span><i>✦</i><span>Calendrier lunaire</span><i>✦</i><img src="assets/grazia-logo-white.svg" alt=""><i>✦</i>
       </div>
     </div>
+
+    <!-- ========== COMMENT ÇA MARCHE ========== -->
+    <section class="section how" id="comment">
+      <div class="section-head section-head--center">
+        <p class="kicker">Comment ça marche</p>
+        <h2 class="h2">Votre profil astral <em>en 2 minutes.</em></h2>
+      </div>
+      <ol class="steps">
+        <li><span class="step-num">1</span><h3>Répondez à 6 questions</h3><p>Votre prénom, votre date et votre lieu de naissance, vos envies du moment. C’est gratuit.</p></li>
+        <li><span class="step-num">2</span><h3>Recevez votre profil astral</h3><p>Votre signe, votre chemin de vie, votre meilleur match et un premier aperçu de votre thème, présentés comme une couverture de Grazia, à votre nom.</p></li>
+        <li><span class="step-num">3</span><h3>Débloquez votre thème complet</h3><p>Créez votre compte, téléchargez l’app et retrouvez votre thème natal, votre horoscope quotidien, le tarot et l’astrologue IA.</p></li>
+      </ol>
+      <div class="how-cta"><button class="btn btn-ink btn-lg" data-open-quiz="how">Faire le test gratuit <span aria-hidden="true">→</span></button></div>
+    </section>
 
     <!-- ========== SOMMAIRE ========== -->
     <section class="section sommaire" id="sommaire">
@@ -125,7 +140,7 @@
         </div>
         <div class="rating-badge">
           <span class="rating-value" id="rating-value">4,2</span>
-          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span class="stars" aria-hidden="true">★★★★<span class="stars-off">★</span></span>
           <span class="rating-src">sur <span id="rating-source">Google Play</span> · <span id="rating-downloads">1 000+</span> téléchargements</span>
         </div>
       </div>
@@ -184,8 +199,8 @@
       <div class="final-copy">
         <img src="assets/grazia-logo-white.svg" alt="Grazia" class="final-logo">
         <h2 class="h2 h2--light">Et si c’était <em>vous,</em><br>en couverture&nbsp;?</h2>
-        <p>Répondez à quelques questions et recevez votre couverture astrale personnalisée, avec un premier aperçu de votre thème.</p>
-        <button class="btn btn-gold btn-lg" data-open-quiz="final">Je crée ma couverture <span aria-hidden="true">→</span></button>
+        <p>Répondez à 6 questions&nbsp;: vous recevez gratuitement votre profil astral, mis en page comme une couverture de Grazia à votre nom, avec un premier aperçu de votre thème.</p>
+        <button class="btn btn-gold btn-lg" data-open-quiz="final">Découvrir mon profil astral <span aria-hidden="true">→</span></button>
       </div>
       <div class="cover cover--final" id="final-cover" aria-hidden="true"></div>
     </section>
@@ -209,8 +224,8 @@
 
   <!-- ========== CTA MOBILE COLLANT ========== -->
   <div class="mobile-cta" id="mobile-cta" aria-hidden="true">
-    <div class="mobile-cta-text"><strong>Votre couverture astrale</strong><span>Offerte · 2 minutes</span></div>
-    <button class="btn btn-ink" data-open-quiz="sticky" tabindex="-1">Commencer →</button>
+    <div class="mobile-cta-text"><strong>Votre profil astral</strong><span>Gratuit · 2 minutes</span></div>
+    <button class="btn btn-ink" data-open-quiz="sticky" tabindex="-1">Faire le test →</button>
   </div>
 
   <!-- ========== PARCOURS (overlay plein écran) ========== -->

@@ -136,7 +136,8 @@
       '<span class="plan-detail">Renouvelé chaque semaine, sans engagement</span></label>' +
       "</div>" +
       '<button class="btn btn-ink btn-lg btn-block" data-plan-go>' + planCTA(sel) + "</button>" +
-      '<p class="plans-legal">' + planLegal(sel) + "</p>"
+      '<p class="plans-legal">' + planLegal(sel) + "</p>" +
+      '<ul class="trust"><li>🔒 Paiement sécurisé</li><li>Résiliable en 1 clic</li><li>Sans engagement</li></ul>'
     );
   }
 
@@ -270,7 +271,7 @@
 
   const RENDER = {
     name: () =>
-      '<form class="step" data-form>' + stepHead(1, "Commençons par<br><em>votre prénom.</em>", "Il figurera sur votre couverture personnalisée.") +
+      '<form class="step" data-form>' + stepHead(1, "Commençons par<br><em>votre prénom.</em>", "Il apparaîtra sur votre profil astral, mis en page façon couverture Grazia.") +
       '<label class="field"><span class="field-label">Prénom</span><input name="name" autocomplete="given-name" maxlength="24" placeholder="Ex. Claire" value="' + esc(state.name) + '" required></label>' +
       '<p class="field-error" data-error></p>' +
       '<button class="btn btn-ink btn-lg btn-block">Continuer →</button></form>',
@@ -312,7 +313,7 @@
       '<div class="orbit" aria-hidden="true"><span class="orbit-glyph">' + sign().glyph + '</span><i></i><i></i><i></i></div>' +
       '<h2 class="step-title" id="funnel-title">Nous alignons<br><em>vos planètes…</em></h2>' +
       '<ul class="loading-list">' +
-      "<li>Calcul de votre signe solaire</li><li>Lecture de votre chemin de vie</li><li>Tirage de votre carte du jour</li><li>Mise en page de votre couverture</li>" +
+      "<li>Calcul de votre signe solaire</li><li>Lecture de votre chemin de vie</li><li>Tirage de votre carte du jour</li><li>Mise en page de votre profil Grazia</li>" +
       "</ul></div>",
 
     result: () => {
