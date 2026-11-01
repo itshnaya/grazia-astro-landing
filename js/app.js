@@ -58,6 +58,7 @@
     $$("[data-open-quiz]").forEach((b) => b.addEventListener("click", () => openFunnel(b.dataset.openQuiz)));
 
     initTabs();
+    initHeroForm();
     initMobileCta();
     window.addEventListener("scroll", () => $("#topbar").classList.toggle("is-scrolled", window.scrollY > 12), { passive: true });
   }
@@ -74,7 +75,7 @@
       bar.setAttribute("aria-hidden", String(!on));
       $("button", bar).tabIndex = on ? 0 : -1;
     });
-    [".hero-ctas", ".final", ".footer"].forEach((sel) => io.observe($(sel)));
+    ["#hero-form", ".final", ".footer"].forEach((sel) => io.observe($(sel)));
   }
 
   const TABS = [
@@ -265,6 +266,64 @@
     }));
   }
 
+  /* Sélecteurs jour / mois / année (étape 2 du parcours et formulaire du hero) */
+  function birthFieldsHTML() {
+    const days = Array.from({ length: 31 }, (_, i) => i + 1);
+    const y0 = new Date().getFullYear();
+    const years = Array.from({ length: 90 }, (_, i) => y0 - 16 - i);
+    const opt = (v, label, cur) => '<option value="' + v + '"' + (String(cur) === String(v) ? " selected" : "") + ">" + label + "</option>";
+    return '<div class="field-row">' +
+      '<label class="field"><span class="field-label">Jour</span><select name="day" required><option value="">—</option>' + days.map((d) => opt(d, d, state.day)).join("") + "</select></label>" +
+      '<label class="field field--grow"><span class="field-label">Mois</span><select name="month" required><option value="">—</option>' + MONTHS.map((m, i) => opt(i + 1, m, state.month)).join("") + "</select></label>" +
+      '<label class="field"><span class="field-label">Année</span><select name="year" required><option value="">—</option>' + years.map((y) => opt(y, y, state.year)).join("") + "</select></label>" +
+      "</div>";
+  }
+
+  /* Affiche le signe dès que jour + mois sont choisis */
+  function bindSignPreview(form, el) {
+    const update = () => {
+      const d = Number(form.day.value), m = Number(form.month.value);
+      if (d && m) {
+        const s = A.getSign(m, d);
+        el.innerHTML = '<span class="sp-glyph">' + s.glyph + "</span><span>Signe solaire&nbsp;: <strong>" + s.name + "</strong> · " + s.dates + "</span>";
+        el.classList.add("is-on");
+      } else el.classList.remove("is-on");
+    };
+    ["day", "month"].forEach((k) => form[k].addEventListener("change", update));
+    update();
+  }
+
+  /* Validation commune prénom / date ; renvoie un message d'erreur ou null */
+  function readBirth(form) {
+    const d = Number(form.day.value), m = Number(form.month.value), y = Number(form.year.value);
+    if (!d || !m || !y) return "Complétez votre date de naissance.";
+    if (!A.isValidDate(d, m, y)) return "Cette date n’existe pas.";
+    Object.assign(state, { day: d, month: m, year: y });
+    return null;
+  }
+
+  function capitalize(v) {
+    return v.charAt(0).toUpperCase() + v.slice(1);
+  }
+
+  function initHeroForm() {
+    const f = $("#hero-form");
+    $("#hero-birth").innerHTML = birthFieldsHTML();
+    bindSignPreview(f, $("[data-sign-preview]", f));
+    f.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = f.name.value.trim();
+      const err = !name ? "Indiquez votre prénom." : readBirth(f);
+      $("[data-error]", f).textContent = err || "";
+      if (err) return;
+      state.name = capitalize(name);
+      track("hero_form_submit", { sign: sign().id });
+      openFunnel("hero-form", "time");
+      history.push("name", "birth"); // le bouton retour ramène aux deux premières questions, pré-remplies
+      $("#funnel-back").style.visibility = "visible";
+    });
+  }
+
   function sign() {
     return A.getSign(Number(state.month), Number(state.day));
   }
@@ -277,16 +336,8 @@
       '<button class="btn btn-ink btn-lg btn-block">Continuer →</button></form>',
 
     birth: () => {
-      const days = Array.from({ length: 31 }, (_, i) => i + 1);
-      const y0 = new Date().getFullYear();
-      const years = Array.from({ length: 90 }, (_, i) => y0 - 16 - i);
-      const opt = (v, label, cur) => '<option value="' + v + '"' + (String(cur) === String(v) ? " selected" : "") + ">" + label + "</option>";
       return '<form class="step" data-form>' + stepHead(2, esc(state.name) + ", quand êtes-vous <em>née&nbsp;?</em>", "Votre date de naissance détermine votre signe solaire et votre chemin de vie.") +
-        '<div class="field-row">' +
-        '<label class="field"><span class="field-label">Jour</span><select name="day" required><option value="">—</option>' + days.map((d) => opt(d, d, state.day)).join("") + "</select></label>" +
-        '<label class="field field--grow"><span class="field-label">Mois</span><select name="month" required><option value="">—</option>' + MONTHS.map((m, i) => opt(i + 1, m, state.month)).join("") + "</select></label>" +
-        '<label class="field"><span class="field-label">Année</span><select name="year" required><option value="">—</option>' + years.map((y) => opt(y, y, state.year)).join("") + "</select></label>" +
-        "</div>" +
+        birthFieldsHTML() +
         '<div class="sign-preview" data-sign-preview></div>' +
         '<p class="field-error" data-error></p>' +
         '<button class="btn btn-ink btn-lg btn-block">Continuer →</button></form>';
@@ -407,28 +458,16 @@
     name: (root) => bindForm(root, (f) => {
       const v = f.name.value.trim();
       if (!v) return "Indiquez votre prénom.";
-      state.name = v.charAt(0).toUpperCase() + v.slice(1);
+      state.name = capitalize(v);
       goTo("birth");
     }),
 
     birth: (root) => {
       const f = $("form", root);
-      const preview = () => {
-        const d = Number(f.day.value), m = Number(f.month.value);
-        const el = $("[data-sign-preview]", root);
-        if (d && m) {
-          const s = A.getSign(m, d);
-          el.innerHTML = '<span class="sp-glyph">' + s.glyph + "</span><span>Signe solaire&nbsp;: <strong>" + s.name + "</strong> · " + s.dates + "</span>";
-          el.classList.add("is-on");
-        } else el.classList.remove("is-on");
-      };
-      ["day", "month", "year"].forEach((k) => f[k].addEventListener("change", preview));
-      preview();
+      bindSignPreview(f, $("[data-sign-preview]", root));
       bindForm(root, () => {
-        const d = Number(f.day.value), m = Number(f.month.value), y = Number(f.year.value);
-        if (!d || !m || !y) return "Complétez votre date de naissance.";
-        if (!A.isValidDate(d, m, y)) return "Cette date n’existe pas.";
-        Object.assign(state, { day: d, month: m, year: y });
+        const err = readBirth(f);
+        if (err) return err;
         goTo("time");
       });
     },

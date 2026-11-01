@@ -42,12 +42,18 @@
       <div class="hero-copy">
         <p class="kicker"><span class="kicker-dot"></span> <span id="season-label">Saison du Scorpion</span> · Nouvelle app</p>
         <h1 class="display">L’astrologie,<br><em>version</em> <span class="nowrap">Grazia.</span></h1>
-        <p class="lead">Horoscope du jour, thème natal complet, tarot et astrologue IA&nbsp;— calculés sur votre date, votre heure et votre lieu de naissance. Pour celles qui savent qui elles sont… et veulent en savoir un peu plus.</p>
-        <div class="hero-ctas">
-          <button class="btn btn-ink btn-lg" data-open-quiz="hero">Découvrir mon profil astral <span aria-hidden="true">→</span></button>
-          <a class="btn btn-ghost btn-lg" href="#sommaire">Découvrir l’app</a>
-        </div>
-        <p class="hero-meta"><span class="stars" aria-hidden="true">★</span> <strong>4,2/5</strong> sur Google Play · Test gratuit · 2 minutes</p>
+        <p class="lead">Horoscope du jour, thème natal complet, tarot et astrologue IA&nbsp;— calculés sur votre date, votre heure et votre lieu de naissance. <span class="only-desktop">Pour celles qui savent qui elles sont… et veulent en savoir un peu plus.</span></p>
+
+        <!-- Début du test directement dans la page : prénom + date, puis le parcours s'ouvre à la question 3 -->
+        <form class="hero-form" id="hero-form" novalidate>
+          <p class="hero-form-title"><span class="hero-form-badge">Test gratuit</span> Découvrez votre profil astral</p>
+          <label class="field"><span class="field-label">Votre prénom</span><input name="name" autocomplete="given-name" maxlength="24" placeholder="Ex. Claire"></label>
+          <div id="hero-birth"></div>
+          <div class="sign-preview" data-sign-preview></div>
+          <p class="field-error" data-error></p>
+          <button class="btn btn-ink btn-lg btn-block">Découvrir mon profil astral <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="hero-meta"><span class="stars" aria-hidden="true">★</span> <strong>4,2/5</strong> sur Google Play · 6 questions · 2 minutes</p>
       </div>
 
       <div class="hero-visual" aria-hidden="true">
